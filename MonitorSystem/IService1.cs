@@ -19,17 +19,21 @@ namespace MonitorSystem
     {
 
         [OperationContract]
-        string InsertBasicDetails(BasicDetails BasicInfo, string rd,int cnt);
+        [System.ServiceModel.Web.WebInvoke(Method = "POST", ResponseFormat = System.ServiceModel.Web.WebMessageFormat.Json, BodyStyle = System.ServiceModel.Web.WebMessageBodyStyle.Wrapped, UriTemplate = "json/{id}")]
+        string InsertBasicDetails(BasicDetails BasicInfo, string rd,string wrt);
+
+        //[OperationContract]
+        //void InsertData(BasicDetails BasicInfo, string readval);
 
         [OperationContract]
         [System.ServiceModel.Web.WebInvoke(Method = "POST", ResponseFormat = System.ServiceModel.Web.WebMessageFormat.Json, BodyStyle = System.ServiceModel.Web.WebMessageBodyStyle.Wrapped, UriTemplate = "json/{id}")]
-        string GetUpdatedBasic(BasicDetails BasicInfoEdit);
+        string GetUpdatedBasic(BasicDetails BasicInfoEdit, string Editrd, string Editwrt);
 
         [OperationContract]
         [System.ServiceModel.Web.WebInvoke(Method = "POST", ResponseFormat = System.ServiceModel.Web.WebMessageFormat.Json, BodyStyle = System.ServiceModel.Web.WebMessageBodyStyle.Wrapped, UriTemplate = "json/{id}")]
         string DeleteBasicInfo(string BasicId);
 
-       
+
         [OperationContract]
         [System.ServiceModel.Web.WebInvoke(Method = "Get", ResponseFormat = System.ServiceModel.Web.WebMessageFormat.Json, BodyStyle = System.ServiceModel.Web.WebMessageBodyStyle.Wrapped, UriTemplate = "json/{id}")]
         string getBasicInfoById(string Id);
@@ -42,88 +46,115 @@ namespace MonitorSystem
 
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
+    //[DataContract]
+    //public class Movie
+    //{
+    //    public BsonObjectId Id { get; set; }
+    //    public string Title { get; set; }
+    //    public string Year { get; set; }
+    //    public List<string> Actors { get; set; }
+
+    //    public void AddActor(string actor)
+    //    {
+    //        if (Actors == null)
+    //        {
+    //            Actors = new List<string>();
+    //        }
+    //        Actors.Add(actor);
+    //    }
+    //}
     [DataContract]
     public class BasicDetails
     {
-       
-        public string basicid { get; set; }
-        public string name { get; set; }
+        public ObjectId _id { get; set; }
 
+        [DataMember]
+        public string basicid { get ; set; }
+        [DataMember]
+        public string name { get; set; }
+        [DataMember]
         public string description { get; set; }
+        [DataMember]
         public string expire_t { get; set; }
+        [DataMember]
         public string expire_s { get; set; }
        
         public List<string> read = new List<string>();
+        public void AddRead(string rd)
+        {
+            if (read == null)
+            {
+                read = new List<string>();
+            }
+            read.Add(rd);
+        }
         public List<string> write = new List<string>();
-       
-        public ObjectId _id { get; set; }
+        public void AddWrite(string wrt)
+        {
+            if (write == null)
+            {
+                write = new List<string>();
+            }
+            write.Add(wrt);
+        }
+        
       
-        [DataMember]
-        public List<string> Read
-        {
-            get { return this.read; }
-            set { this.read = value; }
-        }
-        [DataMember]
-        public List<string> Write
-        {
-            get { return this.write; }
-            set { this.write = value; }
-        }
-        [DataMember]
+        
+        //[DataMember]
 
-        public string BasicId
-        {
+        //public string BasicId
+        //{
 
-            get { return basicid; }
+        //    get { return basicid; }
 
-            set { basicid = value; }
+        //    set { basicid = value; }
 
-        }
-       
-        [DataMember]
+        //}
 
-        public string Name
-        {
+        //[DataMember]
 
-            get { return name; }
+        //public string Name
 
-            set { name = value; }
+        //{
 
-        }
+        //    get { return name; }
 
-        [DataMember]
+        //    set { name = value; }
 
-        public string Description
-        {
+        //}
 
-            get { return description; }
+        //[DataMember]
 
-            set { description = value; }
+        //public string Description
+        //{
 
-        }
+        //    get { return description; }
 
-        [DataMember]
+        //    set { description = value; }
 
-        public string Expire_t
-        {
+        //}
 
-            get { return expire_t; }
+        //[DataMember]
 
-            set { expire_t = value; }
+        //public string Expire_t
+        //{
 
-        }
+        //    get { return expire_t; }
 
-        [DataMember]
+        //    set { expire_t = value; }
 
-        public string Expire_s
-        {
+        //}
 
-            get { return expire_s; }
+        //[DataMember]
 
-            set { expire_s = value; }
+        //public string Expire_s
+        //{
 
-        }
+        //    get { return expire_s; }
+
+        //    set { expire_s = value; }
+
+        //}
 
         
     }

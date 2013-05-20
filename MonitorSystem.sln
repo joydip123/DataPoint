@@ -22,6 +22,9 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite2", "..\WebSite2\", 
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "49481"
 	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+		{F1CDAAED-7E4C-47BD-8D5B-82720C3A729A} = {F1CDAAED-7E4C-47BD-8D5B-82720C3A729A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

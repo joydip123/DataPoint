@@ -8,6 +8,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using Newtonsoft.Json;
 using MongoDB.Bson.Serialization;
+using System.Text;
 
 namespace MonitorSystem
 {
@@ -17,85 +18,100 @@ namespace MonitorSystem
     //////////////////////////////////////////////////////////////
     public class Service1 : IService1
     {
+       
+        //public void InsertData(BasicDetails BasicInfo,string readval)
+        //{
+        //    MongoCollection<BsonDocument> Info = BaseClass.db.GetCollection<BsonDocument>("Basic");
+        //    //Create some data
+        //    var movie1 = new Movie { Title = "Indiana Jones and the Raiders of the Lost Ark", Year = "1981" };
+        //    movie1.AddActor("Harrison Ford");
+        //    movie1.AddActor("Karen Allen");
+        //    movie1.AddActor("Paul Freeman");
 
-        public string InsertBasicDetails(BasicDetails BasicInfo,string rd,int cnt)
+            
+        //    Info.Insert(movie1);
+           
+        //}
+        public string InsertBasicDetails(BasicDetails BasicInfo,string rd,string wrt)
         {
             string Message;
            
-           
-
             //////////////////////////////////
-            string [] words=rd.Split(',');
-           
-            string[] terms = { };
-            List<String> tmp = new List<string>();
-            int i=1;
-            foreach (string rd1 in words)
-            {
-                tmp.Add(rd1);
-            }
-            terms = tmp.ToArray();
-           
+            string [] wordRd=rd.Split(',');
+            string [] wordRw = wrt.Split(',');
+            //string[] terms = { };
+            //List<String> tmp = new List<string>();
+            
+            //foreach (string rd1 in words)
+            //{
+            //    tmp.Add(rd1);
+            //}
+            //terms = tmp.ToArray();
+          
             MongoCollection<BsonDocument> Info = BaseClass.db.GetCollection<BsonDocument>("Basic");
-
-            BsonDocument Basicdoc = new BsonDocument {
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            //var basicdetails = new BasicDetails { basicid = BasicInfo.basicid, name = BasicInfo.Name, description=BasicInfo.Description, expire_t=BasicInfo.Expire_t, expire_s=BasicInfo.Expire_s };
+            var basicdetails = new BasicDetails { basicid = BasicInfo.basicid, name = BasicInfo.name, description = BasicInfo.description, expire_t = BasicInfo.expire_t, expire_s = BasicInfo.expire_s };
             
-                        { "basicid", BasicInfo.BasicId },
-                        { "name", BasicInfo.Name },
-                        { "description",BasicInfo.Description },
-                        { "expire_t",BasicInfo.Expire_t },
-                        { "expire_s",BasicInfo.Expire_s },
-                        { "read", new BsonArray() {terms[cnt] } },
-                        { "write", new BsonArray() { rd } }
+            foreach (string rd1 in wordRd){ basicdetails.AddRead(rd1);}foreach (string rd2 in wordRw){basicdetails.AddWrite(rd2);}
+           
+            /////////////////////////////////////////////////////////////////////////////////////////////////////
+            //BsonDocument Basicdoc = new BsonDocument {
             
-            };
+            //            { "basicid", BasicInfo.BasicId },
+            //            { "name", BasicInfo.Name },
+            //            { "description",BasicInfo.Description },
+            //            { "expire_t",BasicInfo.Expire_t },
+            //            { "expire_s",BasicInfo.Expire_s },
+            //            { "read", new BsonArray().Add(BsonValue.Create(rst } },
+                       
+            //            { "write", new BsonArray() {terms[cnt] } },
+            
+            //};
             //----------------------------------------------------------------------------------------
            
             //----------------------------------------------------------------------------------------
-
-            var result = Info.Insert(Basicdoc);
-            if (result != null)
-            {
-
-                Message = BasicInfo.Name + " Details inserted successfully";
-
-            }
-            else
-            {
-
-                Message = BasicInfo.Name + " Details not inserted successfully";
-
-            }
+            
+            var result = Info.Insert(basicdetails);
+            if (result == null )
+            { Message = BasicInfo.name + " Details inserted successfully";}
+            else{Message = BasicInfo.name + " Details not inserted successfully";}
             return Message;
-
         }
         ///////////////////////////////////////////////////////////////
         //                       EDIT FUNCTION
         //////////////////////////////////////////////////////////////
-        public string GetUpdatedBasic(BasicDetails BasicInfoEdit)
+        public string GetUpdatedBasic(BasicDetails BasicInfoEdit, string Editrd, string Editwrt)
         {
-            MongoCollection<BasicDetails> EditInfo = BaseClass.db.GetCollection<BasicDetails>("Basic");
-            string Message;
-            var query = Query.EQ("basicid", BasicInfoEdit.BasicId);
-            var sortBy = SortBy.Descending("basicid");
-            var update = Update.Set("name", BasicInfoEdit.Name)
-                                .Set("description", BasicInfoEdit.Description)
-                                .Set("expire_t", BasicInfoEdit.Expire_t)
-                                .Set("expire_s", BasicInfoEdit.Expire_s);
-            //.Set("read", BasicInfoEdit.Read)
-            //.Set("write", BasicInfoEdit.Write);
 
-            var result = EditInfo.FindAndModify(query, sortBy, update, true);
+            MongoCollection<BsonDocument> Info = BaseClass.db.GetCollection<BsonDocument>("Basic");
+            string Message;
+            var query = Query.EQ("basicid", BasicInfoEdit.basicid);
+            var sortBy = SortBy.Descending("basicid");
+            var basicdetails = Update.Set("basicid", BasicInfoEdit.basicid)
+                                     .Set("name", BasicInfoEdit.name)
+                                     .Set("description", BasicInfoEdit.description)
+                                     .Set("expire_t", BasicInfoEdit.expire_t)
+                                     .Set("expire_s", BasicInfoEdit.expire_s)
+                                     .Set("read", BsonArray.Create(Editrd.Split(',').Select(o => o.Trim())))
+                                     .Set("write", BsonArray.Create(Editwrt.Split(',').Select(p => p.Trim())));
+
+            //foreach (string rd1 in wordRd) { Update.Set("read", BsonArray.Create(rd.Split(',').Select(o => o.Trim()))); }
+            //foreach (string rd2 in wordRw) { Update.Set("write" + i.ToString(), rd2); i++; };
+
+            // var result = Update.PushAll("Basic",Info.ToBsonDocument());
+            var result = Info.FindAndModify(query, sortBy, basicdetails, true);
             if (result != null)
             {
 
-                Message = BasicInfoEdit.Name + " Edited successfully";
+
+                Message = BasicInfoEdit.name + " Edited successfully";
 
             }
             else
             {
 
-                Message = BasicInfoEdit.Name + " Edit was not successful";
+                Message = BasicInfoEdit.name + " Edit was not successful";
 
             }
             return Message;
@@ -130,22 +146,28 @@ namespace MonitorSystem
 
         //////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
         public string getBasicInfoById(string Id)
         {
-
             MongoCollection<BasicDetails> GetBasic = BaseClass.db.GetCollection<BasicDetails>("Basic");
-
-            BasicDetails objStudent = new BasicDetails();
+            BasicDetails obj = new BasicDetails();
             var dtls = GetBasic.FindOne(Query.EQ("basicid", Id));
 
-            //objStudent.Id = dtls.Id.ToString();
-            objStudent.Name = dtls.Name;
-            objStudent.Description = dtls.Description;
-
-
-            return objStudent.ToString();
+            //obj.read = dtls.read;
+            //obj.write = dtls.write;
+            //string objRd = "";
+            //string objRw="";
+            //for (int i = 0; i < obj.read.Count; i++)
+            //{
+            //    objRd = objRd + obj.read[i]+",";
+            //}
+            //objRd = objRd.TrimEnd(',',' ');
+            //for (int i = 0; i < obj.read.Count; i++)
+            //{
+            //    objRw = objRw + obj.write[i] + ",";
+            //}
+            //objRw = objRw.TrimEnd(',', ' ');              
+                return obj.ToString();
+          
         }
         public IEnumerable<BasicDetails> getAll()
         {

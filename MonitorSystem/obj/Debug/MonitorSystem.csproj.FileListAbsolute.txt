@@ -31,3 +31,14 @@ D:\Projects\MonitorSystem\MonitorSystem\bin\Newtonsoft.Json.xml
 D:\Projects\MonitorSystem\MonitorSystem\obj\Debug\ResolveAssemblyReference.cache
 D:\Projects\MonitorSystem\MonitorSystem\obj\Debug\MonitorSystem.dll
 D:\Projects\MonitorSystem\MonitorSystem\obj\Debug\MonitorSystem.pdb
+E:\SubrataMonitor\MonitorSystem\MonitorSystem\bin\MonitorSystem.dll
+E:\SubrataMonitor\MonitorSystem\MonitorSystem\bin\MonitorSystem.pdb
+E:\SubrataMonitor\MonitorSystem\MonitorSystem\bin\MongoDB.Bson.dll
+E:\SubrataMonitor\MonitorSystem\MonitorSystem\bin\MongoDB.Driver.dll
+E:\SubrataMonitor\MonitorSystem\MonitorSystem\bin\Newtonsoft.Json.dll
+E:\SubrataMonitor\MonitorSystem\MonitorSystem\bin\MongoDB.Bson.xml
+E:\SubrataMonitor\MonitorSystem\MonitorSystem\bin\MongoDB.Driver.xml
+E:\SubrataMonitor\MonitorSystem\MonitorSystem\bin\Newtonsoft.Json.xml
+E:\SubrataMonitor\MonitorSystem\MonitorSystem\obj\Debug\ResolveAssemblyReference.cache
+E:\SubrataMonitor\MonitorSystem\MonitorSystem\obj\Debug\MonitorSystem.dll
+E:\SubrataMonitor\MonitorSystem\MonitorSystem\obj\Debug\MonitorSystem.pdb
