@@ -27,6 +27,7 @@
         {
             height: 28px;
             text-align: center;
+            width: 103px;
         }
         .style4
         {
@@ -36,6 +37,21 @@
         {
             height: 28px;
             text-align: right;
+            width: 103px;
+        }
+        .style6
+        {
+            height: 30px;
+            width: 47%;
+            text-align: left;
+        }
+        .style9
+        {
+            text-align: left;
+        }
+        .style10
+        {
+            width: 542px;
         }
     </style>
 </asp:Content>
@@ -49,7 +65,9 @@
             <tr>
 
                 <td colspan="4" 
-                    style="height: 30px; background-color: #f5712b; text-align: center;">
+                    
+                    style="background-color: #f5712b; " 
+                    class="style6">
 
                     <span class="TextTitle" style="color: #FFFFFF;">&nbsp;Basic Form 
                     Entry</span>
@@ -57,20 +75,11 @@
                 </td>
 
             </tr>
-
+            </table>
+            <table width="84%">
             <tr>
-
-                <td height="20px" colspan="0">
-
-                </td>
-
-            </tr>
-
-            <tr>
-
-                <td width="50%" valign="top">
-
-                    <table id="TableLogin" class="HomePageControlBGLightGray" cellpadding="4" cellspacing="4"
+            <td valign="top">
+            <table id="TableLogin" class="HomePageControlBGLightGray" cellpadding="4" cellspacing="4"
 
                         runat="server" width="100%">
 
@@ -79,7 +88,7 @@
                             <td colspan="2" align="center">
 
                                 <asp:Label ID="LabelMessage" ForeColor="Red" 
-                                    runat="server" EnableViewState="False"></asp:Label><br>
+                                    runat="server" EnableViewState="False"></asp:Label>
 
                             </td>
 
@@ -87,20 +96,23 @@
 
                         <tr style="font-weight: normal; color: #000000">
 
-                            <td align="right" class="style5">
+                            <td align="right" class="style5" 
+                                style="color: #666666">
 
-                                Id<span>:</span>
+                                <strong>Id</strong><span><strong>:</strong></span><strong>
+                                </strong>
 
                             </td>
 
-                            <td align="left" style="padding-left: 10px;">
+                            <td align="left" style="padding-left: 10px;" 
+                                class="style10">
 
                                 <asp:TextBox ID="TextBoxId" runat="server" 
                                     CssClass="textbox" Width="96px"
 
                                     MaxLength="32" Height="25px"></asp:TextBox>
 
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
+                                &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
                                     ControlToValidate="TextBoxId" Display="Dynamic" ErrorMessage="Enter ID" 
                                     ForeColor="#CC0000" SetFocusOnError="True" ValidationGroup="basic"></asp:RequiredFieldValidator>
 
@@ -112,18 +124,20 @@
 
                             <td align="right" class="style5">
 
-                                Name<span class="TextTitle">:</span>
+                                <strong>Name</strong><span class="TextTitle"><strong>:</strong></span><strong>
+                                </strong>
 
                             </td>
 
-                            <td align="left" style="padding-left: 10px;">
+                            <td align="left" style="padding-left: 10px;" 
+                                class="style10">
 
                                 <asp:TextBox ID="TextBoxName" runat="server" 
                                     CssClass="textbox" Width="182px"
 
                                     MaxLength="32" Height="25px"></asp:TextBox>
 
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                     ControlToValidate="TextBoxName" Display="Dynamic" ErrorMessage="Enter Name" 
                                     ForeColor="#CC0000" SetFocusOnError="True" ValidationGroup="basic"></asp:RequiredFieldValidator>
 
@@ -137,11 +151,13 @@
 
                             <td align="right" class="style5">
 
-                                <span class="TextTitle">Description:</span>
+                                <span class="TextTitle"><strong>Description:</strong></span><strong>
+                                </strong>
 
                             </td>
 
-                            <td align="left" style="padding-left: 10px;">
+                            <td align="left" style="padding-left: 10px;" 
+                                class="style10">
 
                                 <asp:TextBox ID="TextBoxDescription" 
                                     runat="server" CssClass="textbox" Width="232px"
@@ -159,17 +175,19 @@
 
                             <td align="right" class="style5">
 
-                                <span class="TextTitle">Expire Time:</span>
+                                <span class="TextTitle"><strong>Expire Time:</strong></span><strong>
+                                </strong>
 
                             </td>
 
-                            <td align="left" style="padding-left: 10px;">
+                            <td align="left" style="padding-left: 10px;" 
+                                class="style10">
 
                                 <asp:TextBox ID="TextBoxTime" runat="server" 
                                     CssClass="textbox" Width="181px" 
                                     Height="25px"></asp:TextBox>
 
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                     ControlToValidate="TextBoxTime" Display="Dynamic" 
                                     ErrorMessage="Enter Expire Time" ForeColor="#CC0000" SetFocusOnError="True" 
                                     ValidationGroup="basic"></asp:RequiredFieldValidator>
@@ -184,17 +202,20 @@
 
                             <td align="right" class="style5">
 
-                                Expire Size:
+                                <strong>Expire Size:
+
+                            </strong>
 
                             </td>
 
-                            <td align="left" style="padding-left: 10px;">
+                            <td align="left" style="padding-left: 10px;" 
+                                class="style10">
 
                                 <asp:TextBox ID="TextBoxSize" runat="server" 
                                     CssClass="textbox" Width="180px" 
                                     Height="25px"></asp:TextBox>
 
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                     ControlToValidate="TextBoxSize" Display="Dynamic" 
                                     ErrorMessage="Enter Expire Size" ForeColor="#CC0000" SetFocusOnError="True" 
                                     ValidationGroup="basic"></asp:RequiredFieldValidator>
@@ -207,9 +228,10 @@
 
                             <td align="right" class="style5">
 
-                                Read:</td>
+                                <strong>Read:</strong></td>
 
-                            <td align="left" style="padding-left: 10px;">
+                            <td align="left" style="padding-left: 10px;" 
+                                class="style10">
 
                                 <asp:gridview ID="gv_read" runat="server" ShowFooter="true" 
             AutoGenerateColumns="false" 
@@ -229,9 +251,10 @@
            </asp:TemplateField>
             </Columns>
         </asp:gridview>
-                                                    <asp:Table ID="mytbl" runat="server" 
-                                                        Width="389px">
-                                                    </asp:Table>
+
+                                <br />
+                                <asp:Label ID="lbl_rd" runat="server" 
+                                    ForeColor="Red"></asp:Label>
 
                             </td>
 
@@ -249,9 +272,10 @@
 
                             <td align="right" class="style5">
 
-                                Write:</td>
+                                <strong>Write:</strong></td>
 
-                            <td align="left" style="padding-left: 10px;">
+                            <td align="left" style="padding-left: 10px;" 
+                                class="style10">
 
                              <asp:gridview ID="gv_write" runat="server" ShowFooter="true" 
             AutoGenerateColumns="false" 
@@ -271,9 +295,10 @@
            </asp:TemplateField>
             </Columns>
         </asp:gridview>
-                                                    <asp:Table ID="mytbl1" runat="server" 
-                                                        Width="389px">
-                                                    </asp:Table>
+
+                                <br />
+                                <asp:Label ID="lbl_wr" runat="server" 
+                                    ForeColor="Red"></asp:Label>
 
                             </td>
 
@@ -292,7 +317,8 @@
 
                                 &nbsp;</td>
 
-                            <td align="left" style="padding-left: 10px;">
+                            <td align="left" style="padding-left: 10px;" 
+                                class="style10">
 
                                 <asp:Button ID="btn_save" runat="server" 
                                     Height="32px" onclick="btn_save_Click" 
@@ -320,59 +346,49 @@
 
                             <td align="right" class="style5">
 
-                                <strong>Details of Basic:</strong></td>
+                                &nbsp;</td>
 
-                            <td align="left" style="padding-left: 10px;">
+                            <td align="left" style="padding-left: 10px;" 
+                                class="style10">
 
                                 &nbsp;</td>
 
                         </tr>
 
-                        <tr>
-
-                            <td align="right" class="style1">
-
-                                &nbsp;</td>
-
-                            <td align="left" style="padding-left: 10px;">
-
-                                <asp:GridView ID="GV_Basic" runat="server" 
-                                   
-                                    onselectedindexchanged="GV_Basic_SelectedIndexChanged" 
-                                    DataKeyNames="basicid">
-                                    <Columns>
-                                        <asp:CommandField SelectText="Detail" 
-                                            ShowSelectButton="True" />
-                                    </Columns>
-                                </asp:GridView>
-
-                            </td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td align="right" class="style1">
-
-                                &nbsp;</td>
-
-                            <td align="left" style="padding-left: 10px;">
-
-                                <asp:TreeView ID="TreeView1" runat="server">
-                                </asp:TreeView>
-
-                            </td>
-
-                        </tr>
-
-                    </table>
-
-                </td>
-
+                        </table>
+            </td>
+            <td valign="top">
+            <table width="100%">
+            <tr>
+            <td valign="top" class="style9">
+            
+             <strong>Details of Basic:</strong></td>
             </tr>
+            <tr>
+            <td valign="top">
+             <asp:TreeView ID="TreeView1" runat="server" 
+                                    ImageSet="Contacts" NodeIndent="10" 
+                                    Width="242px" ShowLines="True" 
+                                    onselectednodechanged="TreeView1_SelectedNodeChanged">
+                                    <HoverNodeStyle Font-Underline="False" />
+                                    <NodeStyle Font-Names="Verdana" Font-Size="8pt" 
+                                        ForeColor="Black" HorizontalPadding="5px" 
+                                        NodeSpacing="0px" VerticalPadding="0px" />
+                                    <ParentNodeStyle BackColor="#F5F3F8" 
+                                        Font-Bold="True" ForeColor="#5555DD" />
+                                    <RootNodeStyle BackColor="#FF9933" />
+                                    <SelectedNodeStyle BackColor="#CCCCCC" 
+                                        Font-Underline="True" HorizontalPadding="0px" 
+                                        VerticalPadding="0px" />
+                                </asp:TreeView>
+            </td>
+            </tr>
+            </table>
+            </td>
+            </tr>
+            </table>
 
-        </table>
-
+           
     </div>
     </asp:Content>
  <%--   </form>
